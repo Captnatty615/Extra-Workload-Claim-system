@@ -47,7 +47,7 @@ export default function DefaultLayout() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8"
-                        src="C:\xampp\htdocs\ifmsystem\react\src\views\logo.png"
+                        src="\views\logo.png"
                         alt="IFM"
                       />
                     </div>
