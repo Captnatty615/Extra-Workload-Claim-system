@@ -1,16 +1,13 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
+import { useNavigate } from 'react-router-dom'
 export default function Personal() {
 
-  function PersonalForm() {
-    let history = useHistory();
+  let navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-
-      history.push('/react/src/views/Claim.jsx')
-    }
-
+    navigate('/Claim');
   }
  
   return (
@@ -23,7 +20,7 @@ export default function Personal() {
       <br></br>
       <main>
                 <div className="personal">
-          <form onSubmit={(e)=>handleSubmit(e)}>
+          <form onSubmit={handleSubmit}>
             <label>Enter First Name:</label>
             <input type="text" required />
             <br></br>
@@ -52,7 +49,7 @@ export default function Personal() {
               <option value="social_protection">SOCIAL PROTECTION</option>
             </select>
             <br></br>
-            <button >Continue</button>
+            <button type="submit">Continue</button>
                     </form>
                 </div>
       </main>
