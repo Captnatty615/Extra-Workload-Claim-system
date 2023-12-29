@@ -3,7 +3,33 @@ import { useNavigate } from "react-router-dom";
 
 export default function Claim() {
   let navigate = useNavigate();
+  const [formData, setFormData] = useState({ faculty: '', department: '', module_code: '', lecture: '', tutorial: '', area: '', day: '' });
 
+  const handleChange = (e) => {
+    
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleAddAnother = () => {
+    // Clearing all fields
+    setFormData({
+      faculty: '',
+      department: '',
+      module_code: '',
+      lecture: '',
+      tutorial: '',
+      area: '',
+      day: '',
+    });
+
+    // Clearing the selected values as well
+  setSelectedFaculty('');
+  setSelectedDepartment('');
+  setSelectedModuleCode('');
+  }
   const faculties = [
     {
       name: "FACULTY OF BUSINESS AND ECONOMICS",
@@ -79,7 +105,7 @@ export default function Claim() {
           <div className="personal">
             <form onSubmit={handleSubmit}>
               <label>Select Faculty:</label>
-              <select value={selectedFaculty} onChange={handleFacultyChange}>
+              <select  id="faculty" name="faculty" value={selectedFaculty} onChange={handleFacultyChange} required>
                 <option value="">Select Faculty</option>
                 {faculties.map((faculty) => (
                   <option key={faculty.name} value={faculty.name}>{faculty.name}</option>
@@ -88,9 +114,11 @@ export default function Claim() {
               <br></br>
               <label>Select Department:</label>
               <select
+                id="department"
+                name="department"
                 value={selectedDepartment}
                 onChange={handleDepartmentChange}
-                disabled={!selectedFaculty}>
+                disabled={!selectedFaculty} required>
                 <option value="">Select Department</option>
                 {selectedFaculty &&
                   faculties
@@ -101,9 +129,11 @@ export default function Claim() {
               <br></br>
               <label>Select Module Code:</label>
               <select
+                id="module_code"
+                name="module_code"
                 value={selectedModuleCode}
                 onChange={handleModuleCodeChange}
-                disabled={!selectedDepartment}>
+                disabled={!selectedDepartment} required>
                 <option value="">Select Module Code</option>
                 {getModuleCodes(selectedFaculty, selectedDepartment).map((code) => (
                   <option key={code} value={code}>{code}</option>
@@ -111,8 +141,27 @@ export default function Claim() {
               </select>
               <br></br>
               <label>Lecture(Hours)</label>
-              <input type="number" id="lecture" min={0} max={24} />
+              <input type="number" id="lecture" name="lecture" min={0} max={24} onChange={handleChange} required />
+              <br></br>
+              <label>Tutorial(Hours)</label>
+              <input type="number" id="tutorial" name="tutorial" min={0} max={24} onChange={handleChange} required />
+              <br></br>
+              <label>Area Taught</label>
+              <select id="area" name="area" onChange={handleChange} required>
+                <option value="main_campus">Main Campus</option>
+                <option value="maktaba">Maktaba</option>
+              </select>
+              <br></br>
+              <label>Day of the week</label>
+              <select id="day" name="day" onChange={handleChange} required>
+                <option value="weekend">Weekday</option>
+                <option value="weekday">Weekend</option>
+              </select>
+              <br></br>
+              <div className="button-container">
+              <button type="button" onClick={handleAddAnother}>Add</button>
               <button type="submit">Continue</button>
+              </div>
             </form>
           </div>
         </div>

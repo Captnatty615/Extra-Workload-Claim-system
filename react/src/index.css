@@ -27,3 +27,7 @@
     border-radius: 8px;
     cursor: pointer;
 }
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
