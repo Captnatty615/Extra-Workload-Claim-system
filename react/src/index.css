@@ -2,16 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.personal {
+.default {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
 }
-.personal label {
+.default label {
     text-align: left;
     display: block;
 }
-.personal input, .personal select {
+.default input, .default select {
     width: 100%;
     padding: 6px 10px;
     margin: 10px 0;
@@ -19,7 +19,7 @@
     box-sizing: border-box;
     display: block;
 }
-.personal button {
+.default button {
     background: #424242;
     color: white;
     border: 0;
