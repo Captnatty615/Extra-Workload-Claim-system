@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, Outlet } from 'react-router-dom'
+import myImage from '../../../logo.png'
 
 const user = {
   name: 'Tom Cook',
@@ -17,7 +18,6 @@ const navigation = [
   { name: 'Status', to: 'Status' },
 ]
 const userNavigation = [
-  { name: 'Continue', href: '#' },
   { name: 'Save and Exit', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
@@ -47,7 +47,7 @@ export default function DefaultLayout() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8"
-                        src="\views\logo.png"
+                        src={myImage}
                         alt="IFM"
                       />
                     </div>
