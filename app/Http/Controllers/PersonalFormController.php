@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Teacher;
+use App\Models\Department;
+use App\Models\Faculty;
 
 class PersonalFormController extends Controller
 {
@@ -16,5 +19,7 @@ class PersonalFormController extends Controller
         $department =$request->input('department');
 
         // Perform database logic here
+        // creating new teacher record
+        $teacher = new Teacher();
     }
 }
