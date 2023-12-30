@@ -49,7 +49,7 @@ export default function Personal() {
               <option value="social_protection">SOCIAL PROTECTION</option>
             </select>
             <br></br>
-            <button type="submit">Continue</button>
+            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Continue</button>
                     </form>
                 </div>
       </main>

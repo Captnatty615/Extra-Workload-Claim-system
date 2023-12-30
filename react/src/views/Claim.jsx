@@ -159,8 +159,8 @@ export default function Claim() {
               </select>
               <br></br>
               <div className="button-container">
-              <button type="button" onClick={handleAddAnother}>Add</button>
-              <button type="submit">Continue</button>
+              <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleAddAnother}>Add</button>
+              <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Continue</button>
               </div>
             </form>
           </div>
