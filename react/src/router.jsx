@@ -5,6 +5,7 @@ import Claim from "./views/Claim.jsx";
 import Personal from "./views/Personal.jsx";
 import Status from "./views/Status.jsx";
 import DefaultLayout from "./components/DefaultLayout.jsx";
+import SupportingDocuments from "./views/supportingDocuments.jsx";
 
 const router = createBrowserRouter([
     {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/supportingDocuments',
-                element: <supportingDocuments />
+                element: <SupportingDocuments />
             },
             {
                 path: '/Personal',
