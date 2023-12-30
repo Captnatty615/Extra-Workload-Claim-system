@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PersonalFormController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/submit-personal-form', [PersonalFormController::class, 'submitPersonalForm']);
 
 Route::get('/', function () {
     return view('welcome');
