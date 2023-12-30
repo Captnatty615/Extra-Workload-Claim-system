@@ -11,7 +11,8 @@
     text-align: left;
     display: block;
 }
-.default input, .default select {
+.default input,
+.default select {
     width: 100%;
     padding: 6px 10px;
     margin: 10px 0;
