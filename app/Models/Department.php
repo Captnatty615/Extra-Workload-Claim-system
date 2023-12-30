@@ -11,7 +11,7 @@ class Department extends Model
 
     protected $fillable = ['department'];
 
-    public function teachers() {
+    public function lecturer() {
         return $this->hasMany(Teacher::class);
     }
 
