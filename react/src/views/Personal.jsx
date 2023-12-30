@@ -10,7 +10,7 @@ export default function Personal() {
     const formData = new FormData(e.target);
 
     try {
-      const response = await fetch('/submit-personal-form', {
+      const response = await fetch('/api/submit-form', {
         method: 'POST',
         body: formData,
       });

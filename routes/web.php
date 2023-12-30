@@ -15,7 +15,7 @@ use App\Http\Controllers\PersonalFormController;
 |
 */
 
-Route::post('/submit-personal-form', [PersonalFormController::class, 'submitPersonalForm']);
+Route::post('/api/submit-form', [PersonalFormController::class, 'submitPersonalForm']);
 
 Route::get('/', function () {
     return view('welcome');
