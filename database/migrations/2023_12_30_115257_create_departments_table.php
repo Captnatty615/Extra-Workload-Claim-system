@@ -14,11 +14,11 @@ class CreateDepartmentsTable extends Migration
     public function up()
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->id();
-            $table->string('department_name');
+            $table->string('department');
             $table->string('faculty');
             $table->timestamps();
 
+            $table->primary('department');
             $table->foreign('faculty')->references('id')->on('faculties');
         });
     }

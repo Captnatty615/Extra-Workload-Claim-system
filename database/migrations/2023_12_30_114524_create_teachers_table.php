@@ -21,7 +21,7 @@ class CreateTeachersTable extends Migration
             $table->string('department');
             $table->timestamps();
 
-            $table->foreign('department_id')->reference('id')->on('department');
+            $table->foreign('department')->reference('department')->on('department');
         });
     }
 
