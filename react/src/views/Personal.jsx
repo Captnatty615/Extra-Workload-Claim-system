@@ -4,10 +4,26 @@ import { useNavigate } from 'react-router-dom'
 export default function Personal() {
 
   let navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    navigate('/Claim');
+    const formData = new FormData(e.target);
+
+    try {
+      const response = await fetch('/submit-personal-form', {
+        method: 'POST',
+        body: formData,
+      });
+      if (response.ok) {
+        navigate('/Claim');
+      } else {
+        console.error('Cannot continue');
+      }
+    } catch (error) {
+      console.error('Error during submission:', error);
+    }
+
+    
   }
  
   return (
@@ -22,13 +38,13 @@ export default function Personal() {
                 <div className="default">
           <form onSubmit={handleSubmit}>
             <label>Enter First Name:</label>
-            <input type="text" required />
+            <input type="text" name='firstName' required />
             <br></br>
             <label>Enter Last Name:</label>
-            <input type="text" required />
+            <input type="text" name='lastName' required />
             <br></br>
             <label>Academic Rank</label>
-            <select>
+            <select name='academicRank'>
               <option value="professor">Professor</option>
               <option value="associate_professor">Associate Professor</option>
               <option value="senior_lecturer">Senior Lecturer</option>
@@ -37,7 +53,7 @@ export default function Personal() {
             </select>
             <br></br>
             <label>Department</label>
-            <select>
+            <select name='department'>
               <option value="accounting_finance">ACCOUNTING AND FINANCE</option>
               <option value="economics_tax_management">ECONOMICS AND TAX MANAGEMENT</option>
               <option value="management_sciences">MANAGEMENT SCIENCES</option>
