@@ -36,7 +36,7 @@ export default function Personal() {
       <br></br>
       <main>
                 <div className="default">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} method='POST'>
             <label>Enter First Name:</label>
             <input type="text" name='firstName' required />
             <br></br>
