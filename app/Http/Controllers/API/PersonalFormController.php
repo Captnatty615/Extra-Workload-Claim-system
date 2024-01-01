@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PersonalInfo;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\ResponseFactory;
 
 class PersonalFormController extends Controller
 {
@@ -17,6 +19,10 @@ class PersonalFormController extends Controller
         $personalInfo->department = $request->input('department');
         $personalInfo->save();
 
-        
+        return response()->json([
+            'status' => 200,
+            'message'=> "Successfully added personal information!",
+
+        ]);
     }
 }
