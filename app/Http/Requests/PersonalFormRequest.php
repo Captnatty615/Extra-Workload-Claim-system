@@ -13,7 +13,7 @@ class PersonalFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class PersonalFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstName' => ['required', 'string'],
+            'lastName'  => ['required', 'string'],
+            'academicRank' => ['required', 'string'],
+            'department' => ['required', 'string']
+
         ];
     }
 }

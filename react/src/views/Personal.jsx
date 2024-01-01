@@ -1,19 +1,26 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
+import axiosClient from '../axios';
 export default function Personal() {
+const state = {
+    firstName: '',
+    lastName: '',
+    academicRank: '',
+    department: '',
+    
+  }
+  const handleInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
   let navigate = useNavigate();
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-
     try {
-      const response = await fetch('/submit-personal-form', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await axiosClient.post('/api/submit', this.state);
       if (response.ok) {
         navigate('/Claim');
       } else {
@@ -21,7 +28,7 @@ export default function Personal() {
       }
     } catch (error) {
       console.error('Error during submission:', error);
-    }
+    } 
 
     
   }
@@ -38,13 +45,13 @@ export default function Personal() {
                 <div className="default">
           <form onSubmit={handleSubmit} method='POST'>
             <label>Enter First Name:</label>
-            <input type="text" name='firstName' required />
+            <input type="text" name='firstName' onChange={handleInput} value={state.firstName} required />
             <br></br>
             <label>Enter Last Name:</label>
-            <input type="text" name='lastName' required />
+            <input type="text" name='lastName' onChange={handleInput} value={state.lastName} required />
             <br></br>
             <label>Academic Rank</label>
-            <select name='academicRank'>
+            <select name='academicRank' onChange={handleInput} value={state.academicRank}>
               <option value="professor">Professor</option>
               <option value="associate_professor">Associate Professor</option>
               <option value="senior_lecturer">Senior Lecturer</option>
@@ -53,7 +60,7 @@ export default function Personal() {
             </select>
             <br></br>
             <label>Department</label>
-            <select name='department'>
+            <select name='department' onChange={handleInput} value={state.department}>
               <option value="accounting_finance">ACCOUNTING AND FINANCE</option>
               <option value="economics_tax_management">ECONOMICS AND TAX MANAGEMENT</option>
               <option value="management_sciences">MANAGEMENT SCIENCES</option>
