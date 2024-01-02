@@ -20,9 +20,11 @@ export default function ClaimForm() {
     submitFormData();
   };
 
+  
+
   const submitFormData = async () => {
     try {
-      await axios.post('/api/claims', {
+      await axios.post('http://127.0.0.1:8000/api/claims', {
         personalData,
         claimData,
       });

@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./views/Login.jsx";
-import Submit from "./views/Submit.jsx";
+import ClaimForm from "./views/ClaimForm.jsx";
 import Claim from "./views/Claim.jsx";
 import Personal from "./views/Personal.jsx";
 import Status from "./views/Status.jsx";
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
                 element: <Status />
             },
             {
-                path: '/Submit',
-                element: <Submit />
+                path: '/ClaimForm',
+                element: <ClaimForm />
             },
             {
                 path: '/Claim',

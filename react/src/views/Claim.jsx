@@ -1,34 +1,35 @@
 import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 
-export default function Claim() {
+const Claim = ({ onSubmit }) => {
   let navigate = useNavigate();
-  const [formData, setFormData] = useState({ faculty: '', department: '', module_code: '', lecture: '', tutorial: '', area: '', day: '' });
+  const [state, setState] = useState({ faculty: '', claim_department: '', module_code: '', lecture_hours: '', tutorial_hours: '', area: '', day: '' });
 
   const handleChange = (e) => {
     
-    setFormData({
-      ...formData,
+    setState({
+      ...state,
       [e.target.name]: e.target.value,
     });
   }
 
   const handleAddAnother = () => {
     // Clearing all fields
-    setFormData({
+    setState({
       faculty: '',
-      department: '',
+      claim_department: '',
       module_code: '',
-      lecture: '',
-      tutorial: '',
+      lecture_hours: '',
+      tutorial_hours: '',
       area: '',
       day: '',
     });
 
     // Clearing the selected values as well
-  setSelectedFaculty('');
-  setSelectedDepartment('');
-  setSelectedModuleCode('');
+    setSelectedFaculty('');
+    setSelectedDepartment('');
+    setSelectedModuleCode('');
   }
   const faculties = [
     {
@@ -90,6 +91,7 @@ export default function Claim() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onSubmit(state);
     navigate('/supportingDocuments');
   };
 
@@ -105,7 +107,7 @@ export default function Claim() {
           <div className="default">
             <form onSubmit={handleSubmit}>
               <label>Select Faculty:</label>
-              <select  id="faculty" name="faculty" value={selectedFaculty} onChange={handleFacultyChange} required>
+              <select id="faculty" name="faculty" value={selectedFaculty} onChange={handleFacultyChange} required>
                 <option value="">Select Faculty</option>
                 {faculties.map((faculty) => (
                   <option key={faculty.name} value={faculty.name}>{faculty.name}</option>
@@ -159,8 +161,8 @@ export default function Claim() {
               </select>
               <br></br>
               <div className="button-container">
-              <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleAddAnother}>Add</button>
-              <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Continue</button>
+                <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleAddAnother}>Add</button>
+                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Continue</button>
               </div>
             </form>
           </div>
@@ -168,4 +170,10 @@ export default function Claim() {
       </main>
     </>
   );
-}
+};
+
+Claim.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
+
+export default Claim;
