@@ -1,9 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'
-import PropTypes from 'prop-types';
-//import axios from '../axios';
-const Personal = (props) => {
+import axios from '../axios';
+const Personal = () => {
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
@@ -21,15 +20,12 @@ const Personal = (props) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('onSubmit function in PErsonal: ')
-    props.onSubmit(state);
-    console.log('navigating')
-    navigate('/Claim');
+  
     
-    //const response = await axios.post('http://127.0.0.1:8000/api/submit-Personal-Form', state);
-    //if (response.data.status === 200) {
-    //navigate('/Claim');
-    //}
+    const response = await axios.post('http://127.0.0.1:8000/api/submit-Personal-Form', state);
+    if (response.data.status === 200) {
+    navigate('/Claim');
+    }
   }
  
   return (
@@ -77,14 +73,6 @@ const Personal = (props) => {
       </main>
     </>
   )
-};
-
-Personal.propTypes = {
-  onSubmit: PropTypes.func,
-};
-
-Personal.defaultProps = {
-  onSubmit: () => {},
 };
 
 export default Personal;
