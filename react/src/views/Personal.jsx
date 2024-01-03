@@ -20,8 +20,6 @@ const Personal = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    
     const response = await axios.post('http://127.0.0.1:8000/api/submit-Personal-Form', state);
     if (response.data.status === 200) {
     navigate('/Claim');
