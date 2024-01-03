@@ -2,7 +2,7 @@ import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
-const Claim = ({ onSubmit }) => {
+const Claim = (props) => {
   let navigate = useNavigate();
   const [state, setState] = useState({ faculty: '', claim_department: '', module_code: '', lecture_hours: '', tutorial_hours: '', area: '', day: '' });
 
@@ -91,7 +91,10 @@ const Claim = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(state);
+    console.log("data sent to handler")
+    props.onSubmit(state);
+    console.log("data successfully sent to handler")
+    //onSubmit(state);
     navigate('/supportingDocuments');
   };
 
@@ -105,7 +108,7 @@ const Claim = ({ onSubmit }) => {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="default">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} method="post">
               <label>Select Faculty:</label>
               <select id="faculty" name="faculty" value={selectedFaculty} onChange={handleFacultyChange} required>
                 <option value="">Select Faculty</option>
@@ -173,7 +176,10 @@ const Claim = ({ onSubmit }) => {
 };
 
 Claim.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
 };
 
+Claim.defaultProps = {
+  onSubmit: () => {},
+};
 export default Claim;

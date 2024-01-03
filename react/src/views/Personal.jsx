@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types';
 //import axios from '../axios';
-const Personal = ({ onSubmit }) => {
+const Personal = (props) => {
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
@@ -21,8 +21,8 @@ const Personal = ({ onSubmit }) => {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('onSubmit function in PErsonal: ', onSubmit)
-    onSubmit(state);
+    console.log('onSubmit function in PErsonal: ')
+    props.onSubmit(state);
     console.log('navigating')
     navigate('/Claim');
     
@@ -80,7 +80,11 @@ const Personal = ({ onSubmit }) => {
 };
 
 Personal.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
+};
+
+Personal.defaultProps = {
+  onSubmit: () => {},
 };
 
 export default Personal;
