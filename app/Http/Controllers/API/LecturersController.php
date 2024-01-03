@@ -12,16 +12,19 @@ class LecturersController extends Controller
 {
     public function store(Request $request)
     {
-        $personalInfo = new PersonalInfo;
-        $personalInfo->firstName = $request->input('firstName');
-        $personalInfo->lastName = $request->input('lastName');
-        $personalInfo->academicRank = $request->input('academicRank');
-        $personalInfo->department = $request->input('department');
-        $personalInfo->save();
+        $lecturer = new Lecturers ;
+        $lecturer->firstName = $request->input('firstName');
+        $lecturer->lastName = $request->input('lastName');
+        $lecturer->academicRank = $request->input('academicRank');
+        $lecturer->department = $request->input('department');
+        $lecturer->save();
+
+        $lecturer_id = $lecturer->getKey();
 
         return response()->json([
             'status' => 200,
             'message'=> "Successfully added personal information!",
+            'lecturer_id'=> $lecturer_id,
 
         ]);
     }

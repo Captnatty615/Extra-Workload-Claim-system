@@ -1,8 +1,11 @@
 import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import PropTypes from 'prop-types';
+import Personal from "./Personal";
 
-const Claim = (props) => {
+export default function Claim() {
+   //const { lecturer_id } = props.location.state || {};
   let navigate = useNavigate();
   const [state, setState] = useState({ faculty: '', claim_department: '', module_code: '', lecture_hours: '', tutorial_hours: '', area: '', day: '' });
 
@@ -58,8 +61,8 @@ const Claim = (props) => {
   };
 
   const handleDepartmentChange = (e) => {
-    const department = e.target.value;
-    setSelectedDepartment(department);
+    const claim_department = e.target.value;
+    setSelectedDepartment(claim_department);
     setSelectedModuleCode("");
   };
 
@@ -68,7 +71,7 @@ const Claim = (props) => {
     setSelectedModuleCode(moduleCode);
   };
 
-  const getModuleCodes = (faculty, department) => {
+  const getModuleCodes = (faculty, claim_department) => {
     const mapping = {
       "FACULTY OF BUSINESS AND ECONOMICS": {
         "ACCOUNTING AND FINANCE": ["BEF", "BAC", "BBF"],
@@ -86,16 +89,17 @@ const Claim = (props) => {
         "INSURANCE": ["INS100", "INS200"],
       },
     };
-    return (mapping[faculty]?.[department] || []).slice();
+    return (mapping[faculty]?.[claim_department] || []).slice();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("data sent to handler")
-    props.onSubmit(state);
-    console.log("data successfully sent to handler")
-    //onSubmit(state);
-    navigate('/supportingDocuments');
+    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', state); 
+    if (response.data.status === 200) {
+      navigate('/supportingDocuments');
+    }
+    
+    
   };
 
   return (
@@ -108,6 +112,9 @@ const Claim = (props) => {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="default">
+            <div>
+              <Personal />
+            </div>
             <form onSubmit={handleSubmit} method="post">
               <label>Select Faculty:</label>
               <select id="faculty" name="faculty" value={selectedFaculty} onChange={handleFacultyChange} required>
@@ -127,8 +134,8 @@ const Claim = (props) => {
                 <option value="">Select Department</option>
                 {selectedFaculty &&
                   faculties
-                    .find((faculty) => faculty.name === selectedFaculty)?.departments.map((department) => (
-                      <option key={department} value={department}>{department}</option>
+                    .find((faculty) => faculty.name === selectedFaculty)?.departments.map((claim_department) => (
+                      <option key={claim_department} value={claim_department}>{claim_department}</option>
                     ))}
               </select>
               <br></br>
@@ -140,8 +147,8 @@ const Claim = (props) => {
                 onChange={handleModuleCodeChange}
                 disabled={!selectedDepartment} required>
                 <option value="">Select Module Code</option>
-                {getModuleCodes(selectedFaculty, selectedDepartment).map((code) => (
-                  <option key={code} value={code}>{code}</option>
+                {getModuleCodes(selectedFaculty, selectedDepartment).map((module_code) => (
+                  <option key={module_code} value={module_code}>{module_code}</option>
                 ))}
               </select>
               <br></br>
@@ -159,8 +166,8 @@ const Claim = (props) => {
               <br></br>
               <label>Day of the week</label>
               <select id="day" name="day" onChange={handleChange} required>
-                <option value="weekend">Weekday</option>
-                <option value="weekday">Weekend</option>
+                <option value="weekend">Weekend</option>
+                <option value="weekday">Weekday</option>
               </select>
               <br></br>
               <div className="button-container">
@@ -173,13 +180,9 @@ const Claim = (props) => {
       </main>
     </>
   );
-};
-
+}
 Claim.propTypes = {
-  onSubmit: PropTypes.func,
-};
-
-Claim.defaultProps = {
-  onSubmit: () => {},
-};
-export default Claim;
+  location: PropTypes.shape({
+    state: PropTypes.object,
+  }),
+}; 
