@@ -15,8 +15,8 @@ class CreateClaimdetailsTable extends Migration
     {
         Schema::create('claimdetails', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lecturer_id');
-            $table->foreign('lecturer_id')->references('id')->on('lecturers');
+            $table->unsignedBigInteger('claimId');
+            $table->foreign('claimId')->references('id')->on('lecturers');
             $table->string('faculty');
             $table->string('claim_department');
             $table->string('module_code');

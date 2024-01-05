@@ -19,12 +19,12 @@ class LecturersController extends Controller
         $lecturer->department = $request->input('department');
         $lecturer->save();
 
-        $lecturer_id = $lecturer->getKey();
+        $claimId = $lecturer->getKey();
 
         return response()->json([
             'status' => 200,
             'message'=> "Successfully added personal information!",
-            'lecturer_id'=> $lecturer_id,
+            'claimId'=> $claimId,
 
         ]);
     }

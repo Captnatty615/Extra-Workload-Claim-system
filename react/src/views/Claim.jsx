@@ -1,8 +1,9 @@
 import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import PropTypes from 'prop-types';
-import Personal from "./Personal";
+//import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+//import Personal from "./Personal";
 
 export default function Claim() {
    //const { lecturer_id } = props.location.state || {};
@@ -10,30 +11,18 @@ export default function Claim() {
   const [state, setState] = useState({ faculty: '', claim_department: '', module_code: '', lecture_hours: '', tutorial_hours: '', area: '', day: '' });
 
   const handleChange = (e) => {
+    const fieldName = e.target.name;
+    const value = e.target.value;
+    console.log(`updating ${fieldName} to  ${value}`);
     
     setState({
       ...state,
-      [e.target.name]: e.target.value,
+      [fieldName]: value,
+      
     });
+    console.log('claimId:', claimId);
   }
 
-  const handleAddAnother = () => {
-    // Clearing all fields
-    setState({
-      faculty: '',
-      claim_department: '',
-      module_code: '',
-      lecture_hours: '',
-      tutorial_hours: '',
-      area: '',
-      day: '',
-    });
-
-    // Clearing the selected values as well
-    setSelectedFaculty('');
-    setSelectedDepartment('');
-    setSelectedModuleCode('');
-  }
   const faculties = [
     {
       name: "FACULTY OF BUSINESS AND ECONOMICS",
@@ -55,6 +44,7 @@ export default function Claim() {
 
   const handleFacultyChange = (e) => {
     const faculty = e.target.value;
+    console.log('Selected faculty:', faculty);
     setSelectedFaculty(faculty);
     setSelectedDepartment("");
     setSelectedModuleCode("");
@@ -62,13 +52,15 @@ export default function Claim() {
 
   const handleDepartmentChange = (e) => {
     const claim_department = e.target.value;
+    console.log('Selected Department:', claim_department);
     setSelectedDepartment(claim_department);
     setSelectedModuleCode("");
   };
 
   const handleModuleCodeChange = (e) => {
-    const moduleCode = e.target.value;
-    setSelectedModuleCode(moduleCode);
+    const module_code = e.target.value;
+    console.log('Selected code:', module_code);
+    setSelectedModuleCode(module_code);
   };
 
   const getModuleCodes = (faculty, claim_department) => {
@@ -92,11 +84,44 @@ export default function Claim() {
     return (mapping[faculty]?.[claim_department] || []).slice();
   };
 
+  const location = useLocation();
+  const claimId = location?.state?.claimId;
+
+  //Data tp send to request 
+  const dataToSend = {
+    ...state,
+    claimId: claimId,
+  }
+
+  const handleAddAnother = async () => {
+    console.log('data to be sent:', dataToSend);
+    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', dataToSend); 
+    if (response.data.status === 200) {
+      // Clearing all fields
+    setState({
+      faculty: '',
+      claim_department: '',
+      module_code: '',
+      lecture_hours: 0,
+      tutorial_hours: 0,
+      area: '',
+      day: '',
+    });
+
+    // Clearing the selected values as well
+    setSelectedFaculty('');
+    setSelectedDepartment('');
+    setSelectedModuleCode('');
+    }
+    
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', state); 
+    console.log('data to be sent:', dataToSend);
+    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', dataToSend); 
     if (response.data.status === 200) {
-      navigate('/supportingDocuments');
+      navigate('/Submit');
     }
     
     
@@ -110,15 +135,16 @@ export default function Claim() {
         </div>
       </header>
       <main>
+      {console.log('location.state.claimId:', claimId)}
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="default">
-            <div>
-              <Personal />
-            </div>
             <form onSubmit={handleSubmit} method="post">
               <label>Select Faculty:</label>
-              <select id="faculty" name="faculty" value={selectedFaculty} onChange={handleFacultyChange} required>
-                <option value="">Select Faculty</option>
+              <select id="faculty" name="faculty" value={selectedFaculty} onChange={(e) => {
+                handleFacultyChange(e);
+                handleChange(e);
+              }} required>
+                <option value="">select faculty</option>
                 {faculties.map((faculty) => (
                   <option key={faculty.name} value={faculty.name}>{faculty.name}</option>
                 ))}
@@ -126,12 +152,15 @@ export default function Claim() {
               <br></br>
               <label>Select Department:</label>
               <select
-                id="department"
-                name="department"
+                id="claim_department"
+                name="claim_department"
                 value={selectedDepartment}
-                onChange={handleDepartmentChange}
+                onChange={(e) => {
+                  handleDepartmentChange(e);
+                  handleChange(e);
+                }}
                 disabled={!selectedFaculty} required>
-                <option value="">Select Department</option>
+                <option value="">select department</option>
                 {selectedFaculty &&
                   faculties
                     .find((faculty) => faculty.name === selectedFaculty)?.departments.map((claim_department) => (
@@ -144,7 +173,10 @@ export default function Claim() {
                 id="module_code"
                 name="module_code"
                 value={selectedModuleCode}
-                onChange={handleModuleCodeChange}
+                onChange={(e) => {
+                  handleModuleCodeChange(e);
+                  handleChange(e);
+                }}
                 disabled={!selectedDepartment} required>
                 <option value="">Select Module Code</option>
                 {getModuleCodes(selectedFaculty, selectedDepartment).map((module_code) => (
@@ -153,19 +185,21 @@ export default function Claim() {
               </select>
               <br></br>
               <label>Lecture(Hours)</label>
-              <input type="number" id="lecture" name="lecture" min={0} max={24} onChange={handleChange} required />
+              <input type="number" id="lecture" name="lecture_hours" min={0} max={24} onChange={handleChange} required />
               <br></br>
               <label>Tutorial(Hours)</label>
-              <input type="number" id="tutorial" name="tutorial" min={0} max={24} onChange={handleChange} required />
+              <input type="number" id="tutorial" name="tutorial_hours" min={0} max={24} onChange={handleChange} required />
               <br></br>
               <label>Area Taught</label>
               <select id="area" name="area" onChange={handleChange} required>
+              <option value="">Area taught</option>
                 <option value="main_campus">Main Campus</option>
                 <option value="maktaba">Maktaba</option>
               </select>
               <br></br>
               <label>Day of the week</label>
               <select id="day" name="day" onChange={handleChange} required>
+              <option value="">select either weekend or weekday</option>
                 <option value="weekend">Weekend</option>
                 <option value="weekday">Weekday</option>
               </select>
@@ -181,8 +215,8 @@ export default function Claim() {
     </>
   );
 }
-Claim.propTypes = {
+/*Claim.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.object,
   }),
-}; 
+}; */

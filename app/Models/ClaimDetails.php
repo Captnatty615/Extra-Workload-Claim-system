@@ -10,6 +10,7 @@ class ClaimDetails extends Model
     use HasFactory;
     protected $table = 'claimdetails';
     protected $fillable = [
+        'claimId',
         'faculty',
         'claim_department',
         'module_code',

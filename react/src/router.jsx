@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "./views/Login.jsx";
-import ClaimForm from "./views/ClaimForm.jsx";
 import Claim from "./views/Claim.jsx";
+import Submit from "./views/submit.jsx";
 import Personal from "./views/Personal.jsx";
 import Status from "./views/Status.jsx";
 import DefaultLayout from "./components/DefaultLayout.jsx";
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
                 element: <Status />
             },
             {
-                path: '/ClaimForm',
-                element: <ClaimForm />
+                path: '/Submit',
+                element: <Submit />
             },
             {
                 path: '/Claim',

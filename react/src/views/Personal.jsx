@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from '../axios';
+
 export default function Personal() {
   const [state, setState] = useState({
     firstName: '',
@@ -16,14 +17,14 @@ export default function Personal() {
     });
   }
 
-  //let navigate = useNavigate();
+  let navigate = useNavigate();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.post('http://127.0.0.1:8000/api/submit-Personal-Form', state);
     if (response.data.status === 200) {
-      const lecturer_id = response.data.lecturer_id;
-      return <Link to="/Claim" state={{ lecturer_id }} />;
+      const claimId = response.data.claimId; // Replace with actual claimId
+      navigate('/claim', { state: { claimId } });
     }
 
   }

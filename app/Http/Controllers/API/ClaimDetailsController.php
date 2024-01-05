@@ -10,6 +10,7 @@ class ClaimDetailsController extends Controller
 {
     public function store(Request $request){
             $claimDetails = new ClaimDetails();
+            $claimDetails->claimId = $request->input('claimId');
             $claimDetails->faculty = $request->input('faculty');
             $claimDetails->claim_department = $request->input('claim_department');
             $claimDetails->module_code = $request->input('module_code');
