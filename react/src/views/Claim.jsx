@@ -215,8 +215,3 @@ export default function Claim() {
     </>
   );
 }
-/*Claim.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.object,
-  }),
-}; */
