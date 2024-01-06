@@ -1,23 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Lecturers;
 use App\Models\ClaimDetails;
 
+
 class ReportController extends Controller
 {
-    public function index($id){
+    public function index( Request $request){
+        $id = $request->input('claimId');
         //fetch and format data TODO
 
         //fetch data from lecturers table
-        $lecturerData = Lecturer::find($id, ['firstName', 'lastName', 'academicRank', 'department']);
+        $lecturerData = Lecturers::find($id, ['firstName', 'lastName', 'academicRank', 'department']);
+        
 
         //fetch data from the claimDetails table
         $claimDetailsData = ClaimDetails::where('claimId', $id)
         ->select('claim_department','module_code', 'lecture_hours', 'tutorial_hours')
         ->get();
+        
 
         //calculate total hours 
         $totalLectureHours = $claimDetailsData->sum('lecture_hours');
@@ -30,6 +35,7 @@ class ReportController extends Controller
         $maktabaCount = ClaimDetails::where('claimId', $id)
         ->where('area', 'maktaba')
         ->count();
+        
 
         //count records with day = 'weekend'
         $weekendCount = ClaimDetails::where('claimId', $id)

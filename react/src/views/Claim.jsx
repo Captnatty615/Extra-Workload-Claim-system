@@ -86,6 +86,7 @@ export default function Claim() {
 
   const location = useLocation();
   const claimId = location?.state?.claimId;
+  console.log("claimId is: ", claimId);
 
   //Data tp send to request 
   const dataToSend = {
@@ -121,7 +122,7 @@ export default function Claim() {
     console.log('data to be sent:', dataToSend);
     const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', dataToSend); 
     if (response.data.status === 200) {
-      navigate('/Submit');
+      navigate('/Submit', { state: { claimId } });
     }
     
     
