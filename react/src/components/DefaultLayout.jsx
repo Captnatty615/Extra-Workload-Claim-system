@@ -13,7 +13,6 @@ const user = {
 const navigation = [
   { name: 'Personal Information',to: '/Personal'},
   { name: 'Claim Details', to : '/Claim'},
-  //{ name: 'Supporting Documents', to: '/supportingDocuments' },
   { name: 'Submit', to: '/Submit' },
   { name: 'Status', to: 'Status' },
 ]

@@ -48,6 +48,7 @@ export default function Personal() {
             <br></br>
             <label>Academic Rank</label>
             <select name='academicRank' onChange={handleInput} value={state.academicRank}>
+            <option value="">Select Academic Rank</option>
               <option value="professor">Professor</option>
               <option value="associate_professor">Associate Professor</option>
               <option value="senior_lecturer">Senior Lecturer</option>
@@ -57,6 +58,7 @@ export default function Personal() {
             <br></br>
             <label>Department</label>
             <select name='department' onChange={handleInput} value={state.department}>
+            <option value="">Choose your department</option>
               <option value="accounting_finance">ACCOUNTING AND FINANCE</option>
               <option value="economics_tax_management">ECONOMICS AND TAX MANAGEMENT</option>
               <option value="management_sciences">MANAGEMENT SCIENCES</option>

@@ -18,6 +18,7 @@ class ClaimDetailsController extends Controller
             $claimDetails->tutorial_hours = $request->input('tutorial_hours');
             $claimDetails->area = $request->input('area');
             $claimDetails->day = $request->input('day');
+            $claimDetails->attendance_sheet = $request->input('attendanceSheet');
             $claimDetails->save();
 
             return response()->json([

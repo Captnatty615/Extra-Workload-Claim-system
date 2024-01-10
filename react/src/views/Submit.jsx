@@ -26,6 +26,11 @@ export default function Submit() {
         console.log('Error fecthing report data: ', error);
       });
   }
+  const handleCreate = async (e) => {
+    e.preventDefault();
+
+    
+  }
 // empty dependency meaning the effect runs once when component mounts
   return (
       <>
@@ -38,7 +43,8 @@ export default function Submit() {
       <main>
         <div className='default'>
             <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        </div>
+          </div>
+          <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleCreate}>Create</button>
           <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleReport}>Preview Claim Report</button>
         </div>
         <br></br>

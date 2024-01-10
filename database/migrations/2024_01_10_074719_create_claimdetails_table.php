@@ -24,6 +24,7 @@ class CreateClaimdetailsTable extends Migration
             $table->unsignedDecimal('tutorial_hours');
             $table->string('area');
             $table->string('day');
+            $table->string('attendance_sheet');
             $table->timestamps();
         });
     }

@@ -1,14 +1,11 @@
 import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-//import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-//import Personal from "./Personal";
 
 export default function Claim() {
-   //const { lecturer_id } = props.location.state || {};
   let navigate = useNavigate();
-  const [state, setState] = useState({ faculty: '', claim_department: '', module_code: '', lecture_hours: '', tutorial_hours: '', area: '', day: '' });
+  const [state, setState] = useState({ faculty: '', claim_department: '', module_code: '', lecture_hours: '', tutorial_hours: '', area: '', day: '' , attendanceSheet: '',});
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -83,30 +80,42 @@ export default function Claim() {
     };
     return (mapping[faculty]?.[claim_department] || []).slice();
   };
+  const handleFileChange = (e) => {
+    const attendanceSheet = e.target.files[0];
+    console.log('file: ', attendanceSheet);
+    setState({
+      ...state,
+      attendanceSheet,
+    });
+  };
 
   const location = useLocation();
   const claimId = location?.state?.claimId;
   console.log("claimId is: ", claimId);
 
-  //Data tp send to request 
-  const dataToSend = {
-    ...state,
-    claimId: claimId,
-  }
-
   const handleAddAnother = async () => {
-    console.log('data to be sent:', dataToSend);
-    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', dataToSend); 
+    const formData = new FormData();
+    formData.append('faculty', state.faculty);
+    formData.append('claim_department', state.claim_department);
+    formData.append('module_code', state.module_code);
+    formData.append('lecture_hours', state.lecture_hours);
+    formData.append('tutorial_hours', state.tutorial_hours);
+    formData.append('area', state.area);
+    formData.append('day', state.day);
+    formData.append('attendanceSheet', state.attendanceSheet);
+    formData.append('claimId', claimId);
+    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', formData); 
     if (response.data.status === 200) {
       // Clearing all fields
     setState({
       faculty: '',
       claim_department: '',
       module_code: '',
-      lecture_hours: 0,
-      tutorial_hours: 0,
+      lecture_hours: '',
+      tutorial_hours: '',
       area: '',
       day: '',
+      attendanceSheet: '',
     });
 
     // Clearing the selected values as well
@@ -119,13 +128,24 @@ export default function Claim() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('data to be sent:', dataToSend);
-    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', dataToSend); 
+
+    const formData = new FormData();
+    formData.append('faculty', state.faculty);
+    formData.append('claim_department', state.claim_department);
+    formData.append('module_code', state.module_code);
+    formData.append('lecture_hours', state.lecture_hours);
+    formData.append('tutorial_hours', state.tutorial_hours);
+    formData.append('area', state.area);
+    formData.append('day', state.day);
+    formData.append('attendanceSheet', state.attendanceSheet);
+    formData.append('claimId', claimId);
+    for (const pair of formData.entries()){
+      console.log(pair[0], pair[1]);
+    }
+    const response = await axios.post('http://127.0.0.1:8000/api/submit-claimDetails', formData); 
     if (response.data.status === 200) {
       navigate('/Submit', { state: { claimId } });
     }
-    
-    
   };
 
   return (
@@ -204,6 +224,20 @@ export default function Claim() {
                 <option value="weekend">Weekend</option>
                 <option value="weekday">Weekday</option>
               </select>
+              <br></br>
+              <label>Attach attendance sheet</label>
+                <input
+                  type="file"
+                  id="attendanceSheet"
+                name="attendanceSheet"
+                value={state.attendanceSheet}
+                onChange={(e) => {
+                  handleFileChange(e);
+                  handleChange(e);
+                }}
+                  accept=".pdf, .xlsx, .csv"
+                  required
+              />
               <br></br>
               <div className="button-container">
                 <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleAddAnother}>Add</button>

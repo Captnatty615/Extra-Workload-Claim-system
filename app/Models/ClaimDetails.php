@@ -18,5 +18,6 @@ class ClaimDetails extends Model
         'tutorial_hours',
         'area',
         'day',
+        'attendance_sheet',
     ];
 }
