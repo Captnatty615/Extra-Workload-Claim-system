@@ -7,8 +7,8 @@ export default function Personal() {
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
-    academicRank: 'proffessor',
-    department: 'accounting_finance',
+    academicRank: '',
+    department: '',
   });
   const handleInput = (e) => {
     setState({

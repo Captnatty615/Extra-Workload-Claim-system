@@ -1,23 +1,20 @@
-import {  useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import {  useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
 export default function Submit() {
 
   const [reportData, setReportData] = useState("");
-  const [showReport, setShowReport] = useState(false);
+  const [showReport, setShowReport] = useState(true);
 
   const location = useLocation();
   const claimId = location?.state?.claimId;
   console.log("claimId is: ", claimId);
 
-  const handleReport = async (e) => {
-    e.preventDefault();
-    
-
-    //making api request to fetch report data
-    await axios.post(`http://127.0.0.1:8000/api/report`, {claimId})
+  useEffect(() => {
+    if (claimId) {
+       axios.post(`http://127.0.0.1:8000/api/report`, {claimId})
       .then(response => {
         setReportData(response.data);
         setShowReport(true);
@@ -26,10 +23,13 @@ export default function Submit() {
         console.log('Error fecthing report data: ', error);
       });
   }
-  const handleCreate = async (e) => {
-    e.preventDefault();
-
     
+  }, [claimId]);
+  let navigate = useNavigate();
+  const handleEditClaim = async (e) => {
+    e.preventDefault();
+    navigate('/Edit', {state : {claimId}}, {state: {reportData}});
+
   }
 // empty dependency meaning the effect runs once when component mounts
   return (
@@ -44,10 +44,9 @@ export default function Submit() {
         <div className='default'>
             <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           </div>
-          <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleCreate}>Create</button>
+          {/*<button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleCreate}>Create</button>
           <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleReport}>Preview Claim Report</button>
-        </div>
-        <br></br>
+  <br></br>*/}
         {/* Show Report Data */}
         {showReport && reportData && (
          <div className='default'>
@@ -84,7 +83,12 @@ export default function Submit() {
               </dl>
             </div>
      </div>
-        )}
+          )}
+           <div className="button-container">
+                <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleEditClaim}>Edit</button>
+                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Create</button>
+              </div>
+        </div>
   </main>
   </>
   )
