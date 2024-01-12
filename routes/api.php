@@ -11,7 +11,7 @@ Route::post('/submit-Personal-Form', [LecturersController::class, 'store']);
 Route::post('/submit-claimDetails', [ClaimDetailsController::class, 'store']);
 Route::post('/report', [ReportController::class, 'index']);
 Route::post('/get-current-data', [EditController::class, 'index']);
-Route::post('/save-updates', [EditController::class, 'index']);
+Route::post('/save-updates', [EditController::class, 'update']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
