@@ -9,29 +9,48 @@ import ViewClaims from "./views/ViewClaims.jsx";
 import Lecturers from "./views/Lecturers.jsx";
 import SignUp from "./views/SignUp.jsx"
 import DefaultLayout from "./components/DefaultLayout.jsx";
+import GuestLayout from "./components/GuestLayout.jsx";
+import AdminLayout from "./views/Lecturers.jsx";
 
 const router = createBrowserRouter([
     {
-        path: '/Login',
-        element: <Login />
+        path: '/',
+        element: <GuestLayout />,
+        children: [
+            {
+                path: '/Login',
+                element: <Login />
+            },
+            {
+                path: 'Signup',
+                element: <SignUp />
+        
+            },
+        ]
+    },
+    {
+        path: '/',
+        element: <AdminLayout />,
+        children: [
+            {
+                path: '/Lecturers',
+                element: <Lecturers />
+            },
+            {
+                path: '/ViewClaims',
+                element: <ViewClaims />
+            },
+        ]
     },
     {
         path: '/Edit',
         element: <Edit />
     },
     {
-        path: '/Lecturers',
-        element: <Lecturers />
-    },
-    {
         path: '/ViewClaims',
         element: <ViewClaims />
     },
-    {
-        path: 'Signup',
-        element: <SignUp />
-
-    },
+    
     {
         path: '/',
         element: <DefaultLayout />,
