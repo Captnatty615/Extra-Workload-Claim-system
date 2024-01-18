@@ -28,7 +28,6 @@ class PersonalFormRequest extends FormRequest
             'lastName'  => ['required', 'string'],
             'academicRank' => ['required', 'string'],
             'department' => ['required', 'string']
-
         ];
     }
 }

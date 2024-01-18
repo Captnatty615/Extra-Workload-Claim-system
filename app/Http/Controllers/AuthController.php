@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bycrpt($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
         $token = $user->createToken('main')->plainTextToken;
 
@@ -31,15 +32,15 @@ class AuthController extends Controller
         $remember = $credentials['remember'] ?? false;
         unset($credentials['remember']);
 
-        if(Auth::attempt($credentials, $remember)){
-            return response([
+        if (!auth()->attempt($credentials, $remember)) {
+            return Response::json([
                 'error'=> 'The provided credentials are incorrect'
             ], 422);
         }
-        $user = Auth::user();
+        $user = auth()->user();
         $token = $user->createToken('main')->plainTextToken;
 
-        return respoense([
+        return response([
             'user' => $user,
             'token' => $token
         ]);

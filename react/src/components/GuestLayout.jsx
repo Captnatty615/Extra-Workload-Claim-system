@@ -1,6 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { UserStateContext } from "../context/contextProvider";
 
 export default function GuestLayout() {
+
+  const { userToken } = UserStateContext();
+
+  if (userToken) {
+    return <Navigate to="/Personal" />;
+  }
+
+  
     return (
       <>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

@@ -5,6 +5,7 @@ import Submit from "./views/Submit.jsx";
 import Personal from "./views/Personal.jsx";
 import Status from "./views/Status.jsx";
 import Edit from "./views/Edit.jsx";
+import Example from "./views/example.jsx";
 import ViewClaims from "./views/ViewClaims.jsx";
 import Lecturers from "./views/Lecturers.jsx";
 import SignUp from "./views/SignUp.jsx"
@@ -47,14 +48,13 @@ const router = createBrowserRouter([
         element: <Edit />
     },
     {
-        path: '/ViewClaims',
-        element: <ViewClaims />
-    },
-    
-    {
         path: '/',
         element: <DefaultLayout />,
         children: [
+            {
+                path: '/example',
+                element: <Example />
+        },
             {
                 path: '/Status',
                 element: <Status />

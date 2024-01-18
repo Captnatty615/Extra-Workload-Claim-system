@@ -4,6 +4,7 @@ import { Bars3Icon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, Outlet, Navigate } from 'react-router-dom'
 import myImage from '../../../logo.png'
 import { UserStateContext } from '../context/contextProvider'
+import axiosClient from '../axios'
 
 const navigation = [
   { name: 'Personal Information',to: '/Personal'},
@@ -11,18 +12,25 @@ const navigation = [
   { name: 'Submit', to: '/Submit' },
   { name: 'Status', to: 'Status' },
 ]
-const userNavigation = [
-  { name: 'Sign out', href: '#' },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function DefaultLayout() {
-  const { currentUser, userToken } = UserStateContext();
+  const { currentUser, userToken, setCurrentUser, setUserToken } = UserStateContext();
   if (!userToken) {
     return <Navigate to='login' />
+  }
+
+  const logout = (ev) => {
+    ev.preventDefault();
+    axiosClient.post('/logout').then( () => {
+      setCurrentUser({});
+      setUserToken(null);
+  })
+      
+
   }
   return (
     <>
@@ -90,21 +98,20 @@ export default function DefaultLayout() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
+                            
+                              <Menu.Item >
+                               
                                   <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
+                                href="#"
+                                onClick={(ev) => logout(ev)}
+                                    className= {"block px-4 py-2 text-sm text-gray-700"}
+                                    
                                   >
-                                    {item.name}
+                                  Sign Out
                                   </a>
-                                )}
+                                
                               </Menu.Item>
-                            ))}
+      
                           </Menu.Items>
                         </Transition>
                       </Menu>
@@ -153,16 +160,17 @@ export default function DefaultLayout() {
                   
                   </div>
                   <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
+                    
                       <Disclosure.Button
-                        key={item.name}
+                        
                         as="a"
-                        href={item.href}
+                      href="#"
+                      onClick={(ev) => logout(ev)}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
-                        {item.name}
+                        Sign Out
                       </Disclosure.Button>
-                    ))}
+                    
                   </div>
                 </div>
               </Disclosure.Panel>
