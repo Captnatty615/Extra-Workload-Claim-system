@@ -20,11 +20,9 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        $token = $user->createToken('main')->plainTextToken;
 
         return response([
-            'user' => $user,
-            'token' => $token
+            'user' => $user
         ]);
     }
     public function login(LoginRequest $request) {
@@ -38,11 +36,13 @@ class AuthController extends Controller
             ], 422);
         }
         $user = auth()->user();
-        $token = $user->createToken('main')->plainTextToken;
+        $token = $user->createToken('main', ['role' => $user->role])->plainTextToken;
+        $role = $user->role;
 
         return response([
             'user' => $user,
-            'token' => $token
+            'token' => $token,
+            'role' => $role
         ]);
         
     }
