@@ -5,13 +5,15 @@ import Submit from "./views/Submit.jsx";
 import Personal from "./views/Personal.jsx";
 import Status from "./views/Status.jsx";
 import Edit from "./views/Edit.jsx";
-import Example from "./views/example.jsx";
-import ViewClaims from "./views/ViewClaims.jsx";
-import Lecturers from "./views/Lecturers.jsx";
+import AddUsers from "./components/admin/AddUsers.jsx";
+import Dashboard from "./components/admin/Dashboard.jsx";
+import Users from "./components/admin/Users.jsx";
+import ViewClaims from "./components/admin/ViewClaims.jsx";
 import SignUp from "./views/SignUp.jsx"
 import DefaultLayout from "./components/DefaultLayout.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
-import AdminLayout from "./views/Lecturers.jsx";
+import MasterLayout from "./admin/MasterLayout.jsx";
+
 
 const router = createBrowserRouter([
     {
@@ -31,16 +33,24 @@ const router = createBrowserRouter([
     },
     {
         path: '/',
-        element: <AdminLayout />,
+        element: <MasterLayout />,
         children: [
             {
-                path: '/Lecturers',
-                element: <Lecturers />
+                path: '/AddUsers',
+                element: <AddUsers />
+            },
+            {
+                path: '/Dashboard',
+                element: <Dashboard />
+            },
+            {
+                path: '/Users',
+                element: <Users />
             },
             {
                 path: '/ViewClaims',
                 element: <ViewClaims />
-            },
+            }
         ]
     },
     {
@@ -51,10 +61,6 @@ const router = createBrowserRouter([
         path: '/',
         element: <DefaultLayout />,
         children: [
-            {
-                path: '/example',
-                element: <Example />
-        },
             {
                 path: '/Status',
                 element: <Status />

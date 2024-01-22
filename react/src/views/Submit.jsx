@@ -1,12 +1,16 @@
 import {  useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosClient from '../axios';
 
 
 export default function Submit() {
 
   const [reportData, setReportData] = useState("");
   const [showReport, setShowReport] = useState(true);
+  const [error, setError] = useState({ __html: '' });
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [moduleCode, setModuleCode] = useState("");
 
   const location = useLocation();
   const claimId = location?.state?.claimId;
@@ -14,10 +18,13 @@ export default function Submit() {
 
   useEffect(() => {
     if (claimId) {
-       axios.post(`http://127.0.0.1:8000/api/report`, {claimId})
+       axiosClient.post(`http://127.0.0.1:8000/api/report`, {claimId})
       .then(response => {
         setReportData(response.data);
         setShowReport(true);
+        setFirstName(response.data?.lecturerData?.firstName || "");
+        setLastName(response.data?.lecturerData?.lastName || "");
+        setModuleCode(response.data?.claimDetailsData?.moduleCode || "");
       })
       .catch(error => {
         console.log('Error fecthing report data: ', error);
@@ -26,10 +33,31 @@ export default function Submit() {
     
   }, [claimId]);
   let navigate = useNavigate();
+  console.log(firstName);
   const handleEditClaim = async (e) => {
     e.preventDefault();
     navigate('/Edit', {state : {claimId}}, {state: {reportData}});
 
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axiosClient.post('/mail', {
+      firstName,
+      lastName,
+      moduleCode
+    })
+      .then(()=> {
+        console.log("ok");
+  })
+  .catch((error) => {
+    if (error.response) {
+      const Errors = Object.values(error.response.data.errors).reduce((accum, next) => [...accum, ...next], [])
+      console.log(Errors)
+      setError({__html: Errors.join('<br>')})
+    }
+    console.error(error)
+})
+    
   }
 // empty dependency meaning the effect runs once when component mounts
   return (
@@ -39,7 +67,10 @@ export default function Submit() {
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight text-gray-900">Submit Claim</h1>
     </div>
-  </header>
+      </header>
+      {error.__html && (<div className="bg-blue-500 rounded py-2 px-3 text-white" 
+          dangerouslySetInnerHTML={error}>
+          </div>)}
       <main>
         <div className='default'>
             <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
@@ -86,7 +117,7 @@ export default function Submit() {
           )}
            <div className="button-container">
                 <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleEditClaim}>Edit</button>
-                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Create</button>
+                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleSubmit}>Submit</button>
               </div>
         </div>
   </main>

@@ -5,6 +5,7 @@ import { NavLink, Outlet, Navigate } from 'react-router-dom'
 import myImage from '../../../logo.png'
 import { UserStateContext } from '../context/contextProvider'
 import axiosClient from '../axios'
+import Footer from "../admin/Footer";
 
 const navigation = [
   { name: 'Personal Information',to: '/Personal'},
@@ -18,9 +19,12 @@ function classNames(...classes) {
 }
 
 export default function DefaultLayout() {
-  const { currentUser, userToken, setCurrentUser, setUserToken } = UserStateContext();
+  const { currentUser, userToken, userRole, setCurrentUser, setUserToken } = UserStateContext();
   if (!userToken) {
-    return <Navigate to='login' />
+    return <Navigate to='/login' />
+  }
+  if (userRole === 'lecturer') {
+    return <Navigate to='/Personal'/>
   }
 
   const logout = (ev) => {
@@ -34,14 +38,6 @@ export default function DefaultLayout() {
   }
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
@@ -177,7 +173,11 @@ export default function DefaultLayout() {
             </>
           )}
         </Disclosure>
+        <main>
         <Outlet />
+        </main>
+        <br></br>
+        <Footer />
         
       </div>
     </>

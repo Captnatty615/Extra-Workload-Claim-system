@@ -160,18 +160,26 @@ export default function Claim() {
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="default">
             <form onSubmit={handleSubmit} method="post">
-              <label>Select Faculty:</label>
+              <div className="space-y-12">
+                <div className="border-b border-gray-900/10 pb-12">
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            < div className='sm:col-span-3'>
+                <label htmlFor="faculty" className="block text-sm font-medium leading-6 text-gray-900">Select Faculty:</label>
+                <div className='mt-2'>
               <select id="faculty" name="faculty" value={selectedFaculty} onChange={(e) => {
                 handleFacultyChange(e);
                 handleChange(e);
-              }} required>
+              }} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required>
                 <option value="">select faculty</option>
                 {faculties.map((faculty) => (
                   <option key={faculty.name} value={faculty.name}>{faculty.name}</option>
                 ))}
-              </select>
-              <br></br>
-              <label>Select Department:</label>
+                  </select>
+                  </div>
+                </div>
+              < div className="sm:col-span-3">
+                <label htmlFor="claim_department" className="block text-sm font-medium leading-6 text-gray-900" >Select Department:</label>
+                <div className="mt-2">
               <select
                 id="claim_department"
                 name="claim_department"
@@ -180,16 +188,19 @@ export default function Claim() {
                   handleDepartmentChange(e);
                   handleChange(e);
                 }}
-                disabled={!selectedFaculty} required>
+                disabled={!selectedFaculty} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required>
                 <option value="">select department</option>
                 {selectedFaculty &&
                   faculties
                     .find((faculty) => faculty.name === selectedFaculty)?.departments.map((claim_department) => (
                       <option key={claim_department} value={claim_department}>{claim_department}</option>
                     ))}
-              </select>
-              <br></br>
-              <label>Select Module Code:</label>
+                  </select>
+                  </div>
+              </div>
+              < div className="sm:col-span-3">
+                <label htmlFor="module_code" className="block text-sm font-medium leading-6 text-gray-900">Select Module Code:</label>
+                <div className="mt-2">
               <select
                 id="module_code"
                 name="module_code"
@@ -198,38 +209,56 @@ export default function Claim() {
                   handleModuleCodeChange(e);
                   handleChange(e);
                 }}
-                disabled={!selectedDepartment} required>
+                disabled={!selectedDepartment} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required>
                 <option value="">Select Module Code</option>
                 {getModuleCodes(selectedFaculty, selectedDepartment).map((module_code) => (
                   <option key={module_code} value={module_code}>{module_code}</option>
                 ))}
-              </select>
-              <br></br>
-              <label>Lecture(Hours)</label>
-              <input type="number" id="lecture" name="lecture_hours" min={0} max={24} onChange={handleChange} required />
-              <br></br>
-              <label>Tutorial(Hours)</label>
-              <input type="number" id="tutorial" name="tutorial_hours" min={0} max={24} onChange={handleChange} required />
-              <br></br>
-              <label>Area Taught</label>
-              <select id="area" name="area" onChange={handleChange} required>
+                  </select>
+                  </div>
+              </div>
+              < div className="sm:col-span-3">
+                <label htmlFor="lecture_hours" className="block text-sm font-medium leading-6 text-gray-900">Lecture(Hours)</label>
+                <div className="mt-2">
+              <input type="number" id="lecture" name="lecture_hours" min={0} max={24} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required />
+                  </div>
+              </div>
+              < div className="sm:col-span-3">
+                <label htmlFor="tutorial_hours" className="block text-sm font-medium leading-6 text-gray-900" >Tutorial(Hours)</label>
+                <div className="mt-2">
+              <input type="number" id="tutorial" name="tutorial_hours" min={0} max={24} onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required />
+                  
+                  </div>
+                    </div>
+                    < div className="sm:col-span-3">
+                      <label htmlFor="area_taught" className="block text-sm font-medium leading-6 text-gray-900">Area Taught</label>
+                      <div className="mt-2">
+              <select id="area" name="area" onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required>
               <option value="">Area taught</option>
                 <option value="main_campus">Main Campus</option>
                 <option value="maktaba">Maktaba</option>
-              </select>
-              <br></br>
-              <label>Day of the week</label>
-              <select id="day" name="day" onChange={handleChange} required>
+                      </select>
+                      </div>
+                    </div>
+                    < div className="sm:col-span-3">
+                      <label htmlFor="area_taught" className="block text-sm font-medium leading-6 text-gray-900">Day of the week</label>
+                      <div className="mt-2">
+              <select id="day" name="day" onChange={handleChange} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6" required>
               <option value="">select either weekend or weekday</option>
                 <option value="weekend">Weekend</option>
                 <option value="weekday">Weekday</option>
-              </select>
-              <br></br>
-              <label>Attach attendance sheet</label>
+                      </select>
+                      </div>
+                    </div>
+                    <div className="sm:col-span-3">
+              <label htmlFor="area_taught" className="block text-sm font-medium leading-6 text-gray-900"
+                      >Attach attendance sheet</label>
+                      <div className="mt-2">
                 <input
                   type="file"
                   id="attendanceSheet"
-                name="attendanceSheet"
+                          name="attendanceSheet"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 value={state.attendanceSheet}
                 onChange={(e) => {
                   handleFileChange(e);
@@ -237,12 +266,16 @@ export default function Claim() {
                 }}
                   accept=".pdf, .xlsx, .csv"
                   required
-              />
-              <br></br>
-              <div className="button-container">
-                <button type="button" className="inline-flex justify-center py-2 px-4 border border-transparent shadow" onClick={handleAddAnother}>Add</button>
-                <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow">Continue</button>
-              </div>
+                      />
+                      </div>
+                    </div>
+                    </div>
+                </div>
+                <div className="mt-6 flex items-center justify-end gap-x-6">
+                <button type="button"  className="rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600" onClick={handleAddAnother}>Add</button>
+                <button type="submit"  className="rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600">Continue</button>
+                </div>
+                </div>  
             </form>
           </div>
         </div>

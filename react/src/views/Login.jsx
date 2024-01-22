@@ -6,7 +6,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ __html: '' });
-  const { setCurrentUser, setUserToken} = UserStateContext();
+  const { setCurrentUser, setUserToken, setUserRole } = UserStateContext();
+
 
   const onSumbit = (e) => {
     e.preventDefault();
@@ -17,8 +18,9 @@ export default function Login() {
       password,
     })
       .then(({ data }) => {
-        setCurrentUser(data.user)
+        setCurrentUser(data.user);
         setUserToken(data.token);
+        setUserRole(data.role);
       })
       .catch((error) => {
         if (error.response) {

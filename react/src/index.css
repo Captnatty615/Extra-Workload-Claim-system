@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 
 .Edit-form {
@@ -13,27 +13,4 @@
     margin: 0 auto;
     text-align: center;
 }
-.default label {
-    text-align: left;
-    display: block;
-}
-.default input,
-.default select {
-    width: 100%;
-    padding: 6px 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
-    display: block;
-}
-.default button {
-    color: white;
-    border: 0;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-.button-container {
-    display: flex;
-    justify-content: space-between;
-}
+
