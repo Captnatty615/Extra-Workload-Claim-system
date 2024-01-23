@@ -10,7 +10,8 @@ export default function Submit() {
   const [error, setError] = useState({ __html: '' });
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [moduleCode, setModuleCode] = useState("");
+  const [amount, setAmount] = useState("");
+  const status = 'pending';
 
   const location = useLocation();
   const claimId = location?.state?.claimId;
@@ -24,7 +25,8 @@ export default function Submit() {
         setShowReport(true);
         setFirstName(response.data?.lecturerData?.firstName || "");
         setLastName(response.data?.lecturerData?.lastName || "");
-        setModuleCode(response.data?.claimDetailsData?.moduleCode || "");
+        setAmount(response.data?.extraAllowance);
+
       })
       .catch(error => {
         console.log('Error fecthing report data: ', error);
@@ -44,10 +46,14 @@ export default function Submit() {
     axiosClient.post('/mail', {
       firstName,
       lastName,
-      moduleCode
     })
       .then(()=> {
-        console.log("ok");
+        axiosClient.post('/claim', {
+          claimId,
+          status,
+          amount
+        })
+        navigate('/Status', { state: { claimId } })
   })
   .catch((error) => {
     if (error.response) {

@@ -19,12 +19,9 @@ function classNames(...classes) {
 }
 
 export default function DefaultLayout() {
-  const { currentUser, userToken, userRole, setCurrentUser, setUserToken } = UserStateContext();
+  const { currentUser, userToken, setCurrentUser, setUserToken } = UserStateContext();
   if (!userToken) {
     return <Navigate to='/login' />
-  }
-  if (userRole === 'lecturer') {
-    return <Navigate to='/Personal'/>
   }
 
   const logout = (ev) => {
