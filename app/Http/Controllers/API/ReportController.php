@@ -22,7 +22,7 @@ class ReportController extends Controller
         $claimDetailsData = ClaimDetails::where('claimId', $id)
         ->select('claim_department','module_code', 'lecture_hours', 'tutorial_hours')
         ->get();
-        $moduleCode = $claimDetailsData->isEmpty() ? null : $claimDetailsData[0]->module_code;
+        
         
         //calculate total hours 
         $totalLectureHours = $claimDetailsData->sum('lecture_hours');
@@ -57,7 +57,7 @@ class ReportController extends Controller
                 'maktabaCount' => $maktabaCount,
                 'weekendCount' => $weekendCount,
                 'extraAllowance' => $extraAllowance,
-                'moduleCode' => $moduleCode
+                
             ]);
         } elseif ($academicRank == "lecturer" && $totalHours > 10){
             $extraAllowance = ($maktabaCount * 10000) + ($weekendCount * 15000) + (($totalHours - 10) * 20000);
@@ -70,7 +70,7 @@ class ReportController extends Controller
                 'maktabaCount' => $maktabaCount,
                 'weekendCount' => $weekendCount,
                 'extraAllowance' => $extraAllowance,
-                'moduleCode' => $moduleCode
+                
             ]);
         } elseif ($academicRank == "senior_lecturer" && $totalHours > 9){
             $extraAllowance = ($maktabaCount * 10000) + ($weekendCount * 15000) + (($totalHours - 9) * 20000);
@@ -83,7 +83,7 @@ class ReportController extends Controller
                 'maktabaCount' => $maktabaCount,
                 'weekendCount' => $weekendCount,
                 'extraAllowance' => $extraAllowance,
-                'moduleCode' => $moduleCode
+                
             ]);
         } elseif ($academicRank == "associate_professor" && $totalHours > 8){
             $extraAllowance = ($maktabaCount * 10000) + ($weekendCount * 15000) + (($totalHours - 8) * 20000);
@@ -96,7 +96,7 @@ class ReportController extends Controller
                 'maktabaCount' => $maktabaCount,
                 'weekendCount' => $weekendCount,
                 'extraAllowance' => $extraAllowance,
-                'moduleCode' => $moduleCode
+                
             ]);
         } elseif ($academicRank == "professor" && $totalHours > 7){
             $extraAllowance = ($maktabaCount * 10000) + ($weekendCount * 15000) + (($totalHours - 7) * 20000);
@@ -109,7 +109,7 @@ class ReportController extends Controller
                 'maktabaCount' => $maktabaCount,
                 'weekendCount' => $weekendCount,
                 'extraAllowance' => $extraAllowance,
-                'moduleCode' => $moduleCode
+                
             ]);
         }  else {
             // If none of the conditions are met, total hours do not exceed the maximum workload
