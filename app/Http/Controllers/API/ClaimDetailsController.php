@@ -27,4 +27,21 @@ class ClaimDetailsController extends Controller
             ]);
 
     }
+
+    public function getAttendanceSheets(Request $request)
+    {
+        $claimId = $request->input('claimId');
+        try {
+            // Fetch all attendance sheets for the given claimId
+            $attendanceSheets = ClaimDetails::where('claimId', $claimId)
+                ->pluck('attendance_sheet')
+                ->toArray();
+
+            // You may want to perform additional validation or error handling here
+
+            return response()->json(['attendance_sheets' => $attendanceSheets]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error fetching attendance sheets'], 500);
+        }
+    }
 }

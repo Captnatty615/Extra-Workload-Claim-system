@@ -29,22 +29,44 @@ class MailController extends Controller
         
             // Fetch claim departments for the given claimId from the database
             $claimDepartments = ClaimDetails::where('claimId', $claimId)->pluck('claim_department')->toArray();
-        
-            // Mapping department names to email addresses
-            $departmentEmails = [
-                'ACCOUNTING AND FINANCE' => 'abdulkarimnatty615@example.com',
-                'COMPUTER SCIENCE' => 'abdulkarimnatty615@example.com',
-                'INFORMATION TECHNOLOGY' => 'abdulkarimnatty615@example.com',
-                // Add more departments and email addresses
-            ];
-            foreach ($claimDepartments as $claimDepartment) {
-                // Default email if the department is not found
-                $hodEmail = $departmentEmails[$claimDepartment];
-                Mail::to($hodEmail)->send(new DepartmentMails($data));
+            $index = 0;
+            while($index < count($claimDepartments)){
+                $department = $claimDepartments[$index];
 
+                switch($department) {
+                    case 'COMPUTER SCIENCE':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'ACCOUNTING AND FINANCE':
+                            Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'ECONOMICS AND TAX MANAGEMENT':
+                        Mail::to('abdulkarimnatty615@gmail@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'MANAGEMENT SCEINCES':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'INFORMATION TECHNOLOGY':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'MATHEMATICS AND ACTURIAL STUDIES':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'BANKING AND FINANCIAL SERVICES':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'SOCIAL PROTECTION':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    case 'INSURANCE':
+                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        break;
+                    default:
+                    return "Invalid department name.";
+                    break;
+                                    }
+                                    $index++;
             }
-        
-            //Mail::to('badru9me@gmail.com')->send(new DepartmentMails($data));
             return response()->json(['all good']);
         }
         catch (Exception $th){

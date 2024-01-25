@@ -25,10 +25,9 @@ Route::post('/status',[ClaimController::class, 'getStatus']);
 Route::post('/getUsers',[AdminController::class, 'getUsers']);
 Route::post('/deleteUser', [AdminController::class, 'deleteUser']);
 Route::post('/getClaims', [AdminController::class, 'getClaims']);
+Route::get('/getAttendance', [ClaimDetailsController::class, 'getAttendanceSheets']);
  
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    
-    
 });
 
