@@ -6800,7 +6800,7 @@ textarea.form-control-lg {
   --bs-aspect-ratio: 42.8571428571%;
 }
 
-.fixed-top, .sb-nav-fixed #layoutSidenav #layoutSidenav_nav, .sb-nav-fixed .sb-topnav {
+.fixed-top, .sb-nav-fixed #layout #layout_nav, .sb-nav-fixed .sb-topnav {
   position: fixed;
   top: 0;
   right: 0;
@@ -10859,17 +10859,17 @@ body {
   min-width: 0;
 }
 
-#layoutSidenav {
+#layout {
   display: flex;
 }
-#layoutSidenav #layoutSidenav_nav {
+#layout #layout_nav {
   flex-basis: 225px;
   flex-shrink: 0;
   transition: transform 0.15s ease-in-out;
   z-index: 1038;
   transform: translateX(-225px);
 }
-#layoutSidenav #layoutSidenav_content {
+#layout #layout_content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10880,10 +10880,10 @@ body {
   margin-left: -225px;
 }
 
-.sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+.sb--toggled #layout #layout_nav {
   transform: translateX(0);
 }
-.sb-sidenav-toggled #layoutSidenav #layoutSidenav_content:before {
+.sb--toggled #layout #layout_content:before {
   content: "";
   display: block;
   position: absolute;
@@ -10898,38 +10898,38 @@ body {
 }
 
 @media (min-width: 992px) {
-  #layoutSidenav #layoutSidenav_nav {
+  #layout #layout_nav {
     transform: translateX(0);
   }
-  #layoutSidenav #layoutSidenav_content {
+  #layout #layout_content {
     margin-left: 0;
     transition: margin 0.15s ease-in-out;
   }
-  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
+  .sb--toggled #layout #layout_nav {
     transform: translateX(-225px);
   }
-  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content {
+  .sb--toggled #layout #layout_content {
     margin-left: -225px;
   }
-  .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content:before {
+  .sb--toggled #layout #layout_content:before {
     display: none;
   }
 }
 .sb-nav-fixed .sb-topnav {
   z-index: 1039;
 }
-.sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
+.sb-nav-fixed #layout #layout_nav {
   width: 225px;
   height: 100vh;
   z-index: 1038;
 }
-.sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
+.sb-nav-fixed #layout #layout_nav .sb- {
   padding-top: 56px;
 }
-.sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
+.sb-nav-fixed #layout #layout_nav .sb- .sb--menu {
   overflow-y: auto;
 }
-.sb-nav-fixed #layoutSidenav #layoutSidenav_content {
+.sb-nav-fixed #layout #layout_content {
   padding-left: 225px;
   top: 56px;
 }
@@ -10952,7 +10952,7 @@ body {
 }
 
 .nav .nav-link .sb-nav-link-icon,
-.sb-sidenav-menu .nav-link .sb-nav-link-icon {
+.sb--menu .nav-link .sb-nav-link-icon {
   margin-right: 0.5rem;
 }
 
@@ -10972,107 +10972,107 @@ body {
   color: #212529;
 }
 
-.sb-sidenav {
+.sb- {
   display: flex;
   flex-direction: column;
   height: 100%;
   flex-wrap: nowrap;
 }
-.sb-sidenav .sb-sidenav-menu {
+.sb- .sb--menu {
   flex-grow: 1;
 }
-.sb-sidenav .sb-sidenav-menu .nav {
+.sb- .sb--menu .nav {
   flex-direction: column;
   flex-wrap: nowrap;
 }
-.sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-heading {
+.sb- .sb--menu .nav .sb--menu-heading {
   padding: 1.75rem 1rem 0.75rem;
   font-size: 0.75rem;
   font-weight: bold;
   text-transform: uppercase;
 }
-.sb-sidenav .sb-sidenav-menu .nav .nav-link {
+.sb- .sb--menu .nav .nav-link {
   display: flex;
   align-items: center;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   position: relative;
 }
-.sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
+.sb- .sb--menu .nav .nav-link .sb-nav-link-icon {
   font-size: 0.9rem;
 }
-.sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-sidenav-collapse-arrow {
+.sb- .sb--menu .nav .nav-link .sb--collapse-arrow {
   display: inline-block;
   margin-left: auto;
   transition: transform 0.15s ease;
 }
-.sb-sidenav .sb-sidenav-menu .nav .nav-link.collapsed .sb-sidenav-collapse-arrow {
+.sb- .sb--menu .nav .nav-link.collapsed .sb--collapse-arrow {
   transform: rotate(-90deg);
 }
-.sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-nested {
+.sb- .sb--menu .nav .sb--menu-nested {
   margin-left: 1.5rem;
   flex-direction: column;
 }
-.sb-sidenav .sb-sidenav-footer {
+.sb- .sb--footer {
   padding: 0.75rem;
   flex-shrink: 0;
 }
 
-.sb-sidenav-dark {
+.sb--dark {
   background-color: #212529;
   color: rgba(255, 255, 255, 0.5);
 }
-.sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
+.sb--dark .sb--menu .sb--menu-heading {
   color: rgba(255, 255, 255, 0.25);
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link {
+.sb--dark .sb--menu .nav-link {
   color: rgba(255, 255, 255, 0.5);
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
+.sb--dark .sb--menu .nav-link .sb-nav-link-icon {
   color: rgba(255, 255, 255, 0.25);
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
+.sb--dark .sb--menu .nav-link .sb--collapse-arrow {
   color: rgba(255, 255, 255, 0.25);
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
+.sb--dark .sb--menu .nav-link:hover {
   color: #fff;
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
+.sb--dark .sb--menu .nav-link.active {
   color: #fff;
 }
-.sb-sidenav-dark .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+.sb--dark .sb--menu .nav-link.active .sb-nav-link-icon {
   color: #fff;
 }
-.sb-sidenav-dark .sb-sidenav-footer {
+.sb--dark .sb--footer {
   background-color: #343a40;
 }
 
-.sb-sidenav-light {
+.sb--light {
   background-color: #f8f9fa;
   color: #212529;
 }
-.sb-sidenav-light .sb-sidenav-menu .sb-sidenav-menu-heading {
+.sb--light .sb--menu .sb--menu-heading {
   color: #adb5bd;
 }
-.sb-sidenav-light .sb-sidenav-menu .nav-link {
+.sb--light .sb--menu .nav-link {
   color: #212529;
 }
-.sb-sidenav-light .sb-sidenav-menu .nav-link .sb-nav-link-icon {
+.sb--light .sb--menu .nav-link .sb-nav-link-icon {
   color: #adb5bd;
 }
-.sb-sidenav-light .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
+.sb--light .sb--menu .nav-link .sb--collapse-arrow {
   color: #adb5bd;
 }
-.sb-sidenav-light .sb-sidenav-menu .nav-link:hover {
+.sb--light .sb--menu .nav-link:hover {
   color: #0d6efd;
 }
-.sb-sidenav-light .sb-sidenav-menu .nav-link.active {
+.sb--light .sb--menu .nav-link.active {
   color: #0d6efd;
 }
-.sb-sidenav-light .sb-sidenav-menu .nav-link.active .sb-nav-link-icon {
+.sb--light .sb--menu .nav-link.active .sb-nav-link-icon {
   color: #0d6efd;
 }
-.sb-sidenav-light .sb-sidenav-footer {
+.sb--light .sb--footer {
   background-color: #e9ecef;
 }
 

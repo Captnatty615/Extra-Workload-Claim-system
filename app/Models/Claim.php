@@ -13,6 +13,6 @@ class Claim extends Model
 
     public function lecturer()
     {
-        return $this->belongsTo(Lecturer::class, 'claimId');
+        return $this->belongsTo(Lecturers::class, 'claimId');
     }
 }

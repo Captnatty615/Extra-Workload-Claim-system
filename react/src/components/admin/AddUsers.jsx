@@ -10,7 +10,7 @@ export default function AddUsers() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [error, setError] = useState({ __html: '' });
 
-  const onSumbit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     setError({ __html: '' })
     
@@ -54,7 +54,7 @@ export default function AddUsers() {
 
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={onSumbit} className="space-y-6" action="#" method="POST" >
+          <form onSubmit={onSubmit} className="space-y-6" action="#" method="POST" >
           
           <div>
                 <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">

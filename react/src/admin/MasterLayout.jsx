@@ -1,27 +1,33 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import "../assets/admin/css/styles.css";
-import "../assets/admin/js/scripts";
-import { Outlet, Navigate } from "react-router-dom";
+import "../assets/css/styles.css";
+import "../assets/js/scripts";
+import { Outlet, useNavigate } from "react-router-dom";
 import { UserStateContext } from '../context/contextProvider'
 
 export default function MasterLayout() {
-    const {userToken, userRole } = UserStateContext();
+    const { userToken, userRole } = UserStateContext();
+    let navigate = useNavigate();
   if (!userToken) {
-    return <Navigate to='login' />
+    navigate('/login')
     }
-    if (userRole !== 'admin') {
-        return <Navigate to="/Personal" />;
-}
+    switch (userRole) {
+        case 'lecturer':
+            navigate('/Personal')
+            break
+   }
     return (
         <>
-            <div className="sb-nav-fixed">
-          <Navbar /> 
-          <div id="layoutSidenav">
-                    <div id="layoutSidenav_content">
+            
+            <div>
+                <Navbar /> 
+                <br></br>
+          <div>
+                    <div>
                         <main>
                             <Outlet />
                         </main>
+                        <br></br>
                         <Footer />
                     </div>
           </div>

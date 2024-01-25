@@ -8,12 +8,14 @@ use App\Mail\DepartmentMails;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\ResponseFactory;
+use App\Models\ClaimDetails;
 
 class MailController extends Controller
 {
     public function index(Request $request) {
         $firstName = $request->input('firstName');
         $lastName = $request->input('lastName');
+        $claimId = $request->input('claimId');
         // $claimDepartment = $request->input('claimDepartment');
 
         $subject = 'Claim approval';
@@ -24,24 +26,25 @@ class MailController extends Controller
             'body' => $body,
         ];
         try{
-            /* loop through claimDepartments array and execute for each value of department the following block of code {
-                     //if($claimDepartment == 'accounting_finance'){
-                Mail::to('emailbelongingtohodofthisdepartment')->send(new DepartmentMails($data));
-            return response()->json(['all good']);
-        }
-        else if($claimDepartment == 'computerScience'){
-             Mail::to('emailbelongingtohodofthisdepartment')->send(new DepartmentMails($data));
-            return response()->json(['all good']);
-        }
-        else if($claimDepartment == 'information_technology'){
-             Mail::to('emailbelongingtohodofthisdepartment')->send(new DepartmentMails($data));
-            return response()->json(['all good']);
-        }
-        and so on for each department...
-            } 
+        
+            // Fetch claim departments for the given claimId from the database
+            $claimDepartments = ClaimDetails::where('claimId', $claimId)->pluck('claim_department')->toArray();
+        
+            // Mapping department names to email addresses
+            $departmentEmails = [
+                'ACCOUNTING AND FINANCE' => 'abdulkarimnatty615@example.com',
+                'COMPUTER SCIENCE' => 'abdulkarimnatty615@example.com',
+                'INFORMATION TECHNOLOGY' => 'abdulkarimnatty615@example.com',
+                // Add more departments and email addresses
+            ];
+            foreach ($claimDepartments as $claimDepartment) {
+                // Default email if the department is not found
+                $hodEmail = $departmentEmails[$claimDepartment];
+                Mail::to($hodEmail)->send(new DepartmentMails($data));
+
             }
-           */
-            Mail::to('badru9me@gmail.com')->send(new DepartmentMails($data));
+        
+            //Mail::to('badru9me@gmail.com')->send(new DepartmentMails($data));
             return response()->json(['all good']);
         }
         catch (Exception $th){

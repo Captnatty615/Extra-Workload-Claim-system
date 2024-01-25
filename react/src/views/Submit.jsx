@@ -46,6 +46,7 @@ export default function Submit() {
     axiosClient.post('/mail', {
       firstName,
       lastName,
+      claimId
     })
       .then(()=> {
         axiosClient.post('/claim', {

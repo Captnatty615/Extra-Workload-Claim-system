@@ -1,73 +1,23 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-
-.Edit-form {
-    max-width: 500px;
-    margin: 0 auto;
-    text-align:center;
+*{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
-.default {
-     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #faf9f6;
+body{
+  font-family: Helvetica;
+  -webkit-font-smoothing: antialiased;
+  background: rgba( 71, 147, 227, 1);
 }
-/* styles.css */
-.status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px;
-  }
-  
-  .status-label {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-left: 10px;
-  }
-  
-  .pending {
-    color: #f39c12; /* Orange color for pending */
-  }
-  
-  .approved {
-    color: #2ecc71; /* Green color for approved */
-  }
-  
-  .rejected {
-    color: #e74c3c; /* Red color for rejected */
-  }
-  
-  .status-icon {
-    margin-right: 10px;
-  }
-  .table tbody tr:hover {
-    background-color: #eee;
-  }
-  .expand {
-    width: 100%;
-  }
- .actions {
-    display: flex;
-    justify-content: space-around;
- }
- .actions svg {
-    cursor: pointer;
- }
- .delete-btn {
-    color: red;
- }
- 
+h2{
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+  padding: 30px 0;
+}
 
-/* Table Styles */
-.fl-table {
+.f2-table {
   border-radius: 5px;
   font-size: 12px;
   font-weight: normal;
@@ -171,7 +121,3 @@
       text-align: center;
   }
 }
-
-  
-  
-
