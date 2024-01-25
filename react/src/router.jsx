@@ -13,6 +13,7 @@ import SignUp from "./views/SignUp.jsx"
 import DefaultLayout from "./components/DefaultLayout.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
 import MasterLayout from "./admin/MasterLayout.jsx";
+import Approve from "./views/Approve.jsx"
 
 
 const router = createBrowserRouter([
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
     {
         path: '/Edit',
         element: <Edit />
+    },
+    {
+        path: '/Approve',
+        element: <Approve />
     },
     {
         path: '/',
