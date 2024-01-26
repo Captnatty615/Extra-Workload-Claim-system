@@ -38,25 +38,25 @@ class MailController extends Controller
                         Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'ACCOUNTING AND FINANCE':
-                            Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                            Mail::to('agathayohannes63@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'ECONOMICS AND TAX MANAGEMENT':
                         Mail::to('abdulkarimnatty615@gmail@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'MANAGEMENT SCEINCES':
-                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        Mail::to('agathayohannes63@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'INFORMATION TECHNOLOGY':
                         Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'MATHEMATICS AND ACTURIAL STUDIES':
-                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        Mail::to('agathayohannes63@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'BANKING AND FINANCIAL SERVICES':
                         Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'SOCIAL PROTECTION':
-                        Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
+                        Mail::to('agathayohannes63@gmail.com')->send(new DepartmentMails($data));
                         break;
                     case 'INSURANCE':
                         Mail::to('abdulkarimnatty615@gmail.com')->send(new DepartmentMails($data));
