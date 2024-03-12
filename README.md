@@ -33,8 +33,8 @@ The Extra Workload Allowance Management System is a web-based application develo
 
 ## Screenshots
 
-![Screenshot 1](path/to/screenshot1.png)
-![Screenshot 2](path/to/screenshot2.png)
+![Screenshot 1](Claim1.PNG)
+![Screenshot 2](Claims.PNG)
 
 The Extra Workload Allowance Management System empowers universities to efficiently manage workload allowances, optimize resource allocation, and support faculty members in fulfilling their professional responsibilities.
 
