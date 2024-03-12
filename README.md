@@ -1,64 +1,35 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# System Description: Extra Workload Allowance Management System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The Extra Workload Allowance Management System is a web-based application developed using React and Laravel, designed to streamline and automate the process of claiming extra workload allowances for lecturers in a university setting.
 
-## About Laravel
+## Key Features:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. **User Authentication and Authorization:** The system provides secure authentication mechanisms to ensure that only authorized users can access its features. Different roles such as administrators, lecturers, and staff are implemented, each with specific permissions.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. **Claim Submission:** Lecturers can submit claims for extra workload allowances through an intuitive user interface. They can specify details such as the type of workload, duration, and supporting documentation.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+3. **Approval Workflow:** Once a claim is submitted, administrators can review and approve it based on predefined criteria. The system supports customizable approval workflows to accommodate varying departmental requirements.
 
-## Learning Laravel
+4. **Calculation Engine:** The system includes a calculation engine that automatically computes the allowance amount based on predefined rules and parameters. This ensures consistency and accuracy in allowance calculations.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+5. **Document Management:** Lecturers can upload supporting documents such as teaching schedules, research commitments, or administrative duties to substantiate their claims. The system securely stores and manages these documents for reference during the approval process.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+6. **Notifications and Reminders:** Automated notifications and reminders are sent to users at different stages of the claim process, reducing delays and improving communication.
 
-## Laravel Sponsors
+7. **Reporting and Analytics:** The system provides reporting and analytics tools to track the status of claims, monitor approval timelines, and generate insights for decision-making and resource allocation.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Benefits:
 
-### Premium Partners
+- **Efficiency:** By automating manual processes, the system reduces paperwork, eliminates redundancies, and accelerates the processing of workload allowance claims.
+- **Transparency:** Lecturers and administrators have real-time visibility into the status of claims, ensuring transparency and accountability in the allocation of workload allowances.
+- **Compliance:** The system enforces institutional policies and regulations, ensuring compliance with legal and contractual obligations related to workload allowances.
+- **Data Integrity:** Centralized storage of claim data and documentation enhances data integrity and security, mitigating the risk of errors, loss, or unauthorized access.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Future Enhancements:
 
-## Contributing
+- Integration with university systems such as HR and payroll for seamless processing of workload allowances.
+- Support for multi-campus or multi-departmental workflows to cater to diverse organizational structures.
+- Enhancements to reporting and analytics capabilities to provide deeper insights into workload distribution and resource utilization.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+The Extra Workload Allowance Management System empowers universities to efficiently manage workload allowances, optimize resource allocation, and support faculty members in fulfilling their professional responsibilities.
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
